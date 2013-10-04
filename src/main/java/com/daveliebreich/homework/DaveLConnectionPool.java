@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * User: davel
  * Date: 10/3/13
  * Time: 9:27 PM
- * To change this template use File | Settings | File Templates.
+ * Homework
  */
 public class DaveLConnectionPool implements ConnectionPool {
     @Override

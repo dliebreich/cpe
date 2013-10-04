@@ -12,7 +12,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
  * User: davel
  * Date: 10/3/13
  * Time: 9:29 PM
- * To change this template use File | Settings | File Templates.
+ * Homework Assignment
  */
 public class DaveLConnectionPoolTest {
     private DaveLConnectionPool cp;
@@ -25,6 +25,7 @@ public class DaveLConnectionPoolTest {
 
     @Test
     public void testReleaseConnection() throws Exception {
+        cp.releaseConnection(null);
 
     }
 
