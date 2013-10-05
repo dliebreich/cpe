@@ -16,32 +16,33 @@ import static org.hamcrest.CoreMatchers.*;
  * Homework Assignment
  */
 public class DaveLConnectionPoolTest {
-    private DaveLConnectionPool cp;
+    private DaveLConnectionPool defaultConnectionPool;
+    private DaveLConnectionPool sizeOneConnectionPool;
 
     @Test
     public void testGetConnection() throws Exception {
-        assertThat(cp.getConnection(), is(nullValue()));
+        assertThat(defaultConnectionPool.getConnection(), is(nullValue()));
 
     }
 
     @Test
     public void testReleaseConnection() throws Exception {
-        cp.releaseConnection(null);
+        defaultConnectionPool.releaseConnection(null);
 
     }
 
     @Before
     public void setUp() throws Exception {
-        cp = new DaveLConnectionPool();
+        defaultConnectionPool = new DaveLConnectionPool();
+        sizeOneConnectionPool = new DaveLConnectionPool(1);
 
     }
 
     @Test
     public void testCanReturnConnectionToPool() throws Exception {
-        DaveLConnectionPool connectionPool = new DaveLConnectionPool(1);
-        Connection first = connectionPool.getConnection();
-        connectionPool.releaseConnection(first);
-        Connection second = connectionPool.getConnection();
+        Connection first = sizeOneConnectionPool.getConnection();
+        sizeOneConnectionPool.releaseConnection(first);
+        Connection second = sizeOneConnectionPool.getConnection();
 
         assertThat(second, notNullValue());
 
@@ -55,9 +56,8 @@ public class DaveLConnectionPoolTest {
 
     @Test
     public void testPoolDoesNotReturnMoreThanSizeConnections() throws Exception {
-        DaveLConnectionPool connectionPool = new DaveLConnectionPool(1);
-        Connection connectionFirst = connectionPool.getConnection();
-        Connection connectionSecond = connectionPool.getConnection();
+        Connection connectionFirst = sizeOneConnectionPool.getConnection();
+        Connection connectionSecond = sizeOneConnectionPool.getConnection();
 
         assertThat(connectionSecond, nullValue());
 
@@ -65,8 +65,7 @@ public class DaveLConnectionPoolTest {
 
     @Test
     public void testCreatePoolOfOneConnection() throws Exception {
-        DaveLConnectionPool connectionPool = new DaveLConnectionPool(1);
-        Connection connection = connectionPool.getConnection();
+        Connection connection = sizeOneConnectionPool.getConnection();
         assertThat(connection, notNullValue());
 
     }
