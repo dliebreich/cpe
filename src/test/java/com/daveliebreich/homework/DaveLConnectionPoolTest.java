@@ -37,6 +37,16 @@ public class DaveLConnectionPoolTest {
     }
 
     @Test
+    public void testPoolDoesNotReturnMoreThanSizeConnections() throws Exception {
+        DaveLConnectionPool connectionPool = new DaveLConnectionPool(1);
+        Connection connectionFirst = connectionPool.getConnection();
+        Connection connectionSecond = connectionPool.getConnection();
+
+        assertThat(connectionSecond, nullValue());
+
+    }
+
+    @Test
     public void testCreatePoolOfOneConnection() throws Exception {
         DaveLConnectionPool connectionPool = new DaveLConnectionPool(1);
         Connection connection = connectionPool.getConnection();
