@@ -19,6 +19,13 @@ public class DaveLConnectionPoolTest {
     private DaveLConnectionPool defaultConnectionPool;
     private DaveLConnectionPool sizeOneConnectionPool;
 
+    @Before
+    public void setUp() throws Exception {
+        defaultConnectionPool = new DaveLConnectionPool();
+        sizeOneConnectionPool = new DaveLConnectionPool(1);
+
+    }
+
     @Test
     public void testGetConnection() throws Exception {
         assertThat(defaultConnectionPool.getConnection(), is(nullValue()));
@@ -28,13 +35,6 @@ public class DaveLConnectionPoolTest {
     @Test
     public void testReleaseConnection() throws Exception {
         defaultConnectionPool.releaseConnection(null);
-
-    }
-
-    @Before
-    public void setUp() throws Exception {
-        defaultConnectionPool = new DaveLConnectionPool();
-        sizeOneConnectionPool = new DaveLConnectionPool(1);
 
     }
 
