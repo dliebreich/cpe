@@ -3,6 +3,8 @@ package com.daveliebreich.homework;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Connection;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
@@ -37,6 +39,8 @@ public class DaveLConnectionPoolTest {
     @Test
     public void testCreatePoolOfOneConnection() throws Exception {
         DaveLConnectionPool connectionPool = new DaveLConnectionPool(1);
+        Connection connection = connectionPool.getConnection();
+        assertThat(connection, notNullValue());
 
     }
 }
