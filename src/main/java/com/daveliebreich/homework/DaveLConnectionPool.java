@@ -15,6 +15,7 @@ public class DaveLConnectionPool implements ConnectionPool {
     private Integer size;
 
     public DaveLConnectionPool(Integer size) {
+        com.google.common.base.Preconditions.checkArgument(size >= 0);
         this.size = size;
     }
 
