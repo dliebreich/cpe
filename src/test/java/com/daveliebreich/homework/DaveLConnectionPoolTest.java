@@ -88,4 +88,14 @@ public class DaveLConnectionPoolTest {
         sizeOneConnectionPool.releaseConnection(secondConnection);
 
     }
+
+    @Test
+    public void testConnectionsAreReused() throws Exception {
+        Connection first = sizeOneConnectionPool.getConnection();
+        sizeOneConnectionPool.releaseConnection(first);
+        Connection second = sizeOneConnectionPool.getConnection();
+
+        assertThat(first, is(second));
+
+    }
 }

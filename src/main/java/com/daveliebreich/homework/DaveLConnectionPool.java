@@ -3,8 +3,8 @@ package com.daveliebreich.homework;
 import com.opower.connectionpool.ConnectionPool;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,11 +15,17 @@ import java.util.List;
  */
 public class DaveLConnectionPool implements ConnectionPool {
     private Integer size;
-    private List<DaveLConnectionWrapper> in_use;
+    private Deque<DaveLConnectionWrapper> in_use;
+    private Deque<DaveLConnectionWrapper> available;
 
     public DaveLConnectionPool(Integer size) {
         com.google.common.base.Preconditions.checkArgument(size >= 0);
-        in_use = new ArrayList<DaveLConnectionWrapper>(size);
+        in_use = new ArrayDeque<DaveLConnectionWrapper>(size);
+        available = new ArrayDeque<DaveLConnectionWrapper>(size);
+
+        for (int index = 0; index < size; index++) {
+            available.add(new DaveLConnectionWrapper());
+        }
         this.size = size;
     }
 
@@ -29,14 +35,12 @@ public class DaveLConnectionPool implements ConnectionPool {
 
     @Override
     public Connection getConnection() throws SQLException {
-        if (size > 0) {
-            size--;
-            DaveLConnectionWrapper connection = new DaveLConnectionWrapper();
+        DaveLConnectionWrapper connection = available.pollFirst();
+        if (connection != null) {
             in_use.add(connection);
-            return connection;  //To change body of implemented methods use File | Settings | File Templates.
-        } else {
-            return null;
         }
+
+        return connection;
     }
 
     @Override
@@ -46,7 +50,7 @@ public class DaveLConnectionPool implements ConnectionPool {
         }
 
         if (in_use.remove(connection)) {
-            size++;
+            available.addLast((DaveLConnectionWrapper) connection);
         } else {
             throw new RuntimeException();
         }
