@@ -32,8 +32,8 @@ public class DaveLConnectionPoolTest {
 
     }
 
-    @Test
-    public void testReleaseConnection() throws Exception {
+    @Test(expected = RuntimeException.class)
+    public void testCanNotReturnNullToPool() throws Exception {
         defaultConnectionPool.releaseConnection(null);
 
     }

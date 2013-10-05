@@ -35,6 +35,9 @@ public class DaveLConnectionPool implements ConnectionPool {
 
     @Override
     public void releaseConnection(Connection connection) throws SQLException {
+        if (connection == null) {
+            throw new RuntimeException();
+        }
         size++;
     }
 
