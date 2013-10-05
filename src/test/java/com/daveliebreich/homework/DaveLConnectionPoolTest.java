@@ -1,11 +1,10 @@
 package com.daveliebreich.homework;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,7 +18,7 @@ public class DaveLConnectionPoolTest {
 
     @Test
     public void testGetConnection() throws Exception {
-        Assert.assertThat(cp.getConnection(), is(nullValue()) );
+        assertThat(cp.getConnection(), is(nullValue()) );
 
     }
 
