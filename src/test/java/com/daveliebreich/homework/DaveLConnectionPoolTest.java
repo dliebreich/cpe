@@ -18,11 +18,13 @@ import static org.hamcrest.CoreMatchers.*;
 public class DaveLConnectionPoolTest {
     private DaveLConnectionPool defaultConnectionPool;
     private DaveLConnectionPool sizeOneConnectionPool;
+    private DaveLConnectionPool secondSizeOneConnectionPool;
 
     @Before
     public void setUp() throws Exception {
         defaultConnectionPool = new DaveLConnectionPool();
         sizeOneConnectionPool = new DaveLConnectionPool(1);
+        secondSizeOneConnectionPool = new DaveLConnectionPool(1);
 
     }
 
@@ -75,6 +77,15 @@ public class DaveLConnectionPoolTest {
         Connection connection = sizeOneConnectionPool.getConnection();
         sizeOneConnectionPool.releaseConnection(connection);
         sizeOneConnectionPool.releaseConnection(connection);
+
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testReturningConnectionFromOtherPoolThrows() throws Exception {
+        Connection connection = sizeOneConnectionPool.getConnection();
+        Connection secondConnection = secondSizeOneConnectionPool.getConnection();
+
+        sizeOneConnectionPool.releaseConnection(secondConnection);
 
     }
 }
