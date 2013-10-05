@@ -18,7 +18,7 @@ public class DaveLConnectionPoolTest {
 
     @Test
     public void testGetConnection() throws Exception {
-        assertThat(cp.getConnection(), is(nullValue()) );
+        assertThat(cp.getConnection(), is(nullValue()));
 
     }
 
@@ -31,6 +31,12 @@ public class DaveLConnectionPoolTest {
     @Before
     public void setUp() throws Exception {
         cp = new DaveLConnectionPool();
+
+    }
+
+    @Test
+    public void testCreatePoolOfOneConnection() throws Exception {
+        DaveLConnectionPool connectionPool = new DaveLConnectionPool(1);
 
     }
 }

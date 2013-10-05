@@ -13,6 +13,14 @@ import java.sql.SQLException;
  * Homework
  */
 public class DaveLConnectionPool implements ConnectionPool {
+    public DaveLConnectionPool(Integer size) {
+        //To change body of created methods use File | Settings | File Templates.
+    }
+
+    public DaveLConnectionPool() {
+        this(0);
+    }
+
     @Override
     public Connection getConnection() throws SQLException {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
