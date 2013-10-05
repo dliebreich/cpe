@@ -36,6 +36,17 @@ public class DaveLConnectionPoolTest {
 
     }
 
+    @Test
+    public void testCanReturnConnectionToPool() throws Exception {
+        DaveLConnectionPool connectionPool = new DaveLConnectionPool(1);
+        Connection first = connectionPool.getConnection();
+        connectionPool.releaseConnection(first);
+        Connection second = connectionPool.getConnection();
+
+        assertThat(second, notNullValue());
+
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void testNegativeSizeThrows() throws Exception {
         new DaveLConnectionPool(-1);

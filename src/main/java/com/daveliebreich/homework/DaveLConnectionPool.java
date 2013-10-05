@@ -26,7 +26,7 @@ public class DaveLConnectionPool implements ConnectionPool {
     @Override
     public Connection getConnection() throws SQLException {
         if (size > 0) {
-            size -= 1;
+            size--;
             return new DaveLConnectionWrapper();  //To change body of implemented methods use File | Settings | File Templates.
         } else {
             return null;
@@ -35,7 +35,7 @@ public class DaveLConnectionPool implements ConnectionPool {
 
     @Override
     public void releaseConnection(Connection connection) throws SQLException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        size++;
     }
 
 }
