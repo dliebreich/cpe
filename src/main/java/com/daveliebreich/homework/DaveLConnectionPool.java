@@ -56,4 +56,7 @@ public class DaveLConnectionPool implements ConnectionPool {
         }
     }
 
+    public Integer availableConnectionCount() {
+        return available.size();
+    }
 }

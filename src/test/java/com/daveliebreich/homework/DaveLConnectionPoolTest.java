@@ -98,4 +98,13 @@ public class DaveLConnectionPoolTest {
         assertThat(first, is(second));
 
     }
+
+    @Test
+    public void testCurrentAvailableSize() throws Exception {
+        assertThat(sizeOneConnectionPool.availableConnectionCount(), is(1));
+        Connection connection = sizeOneConnectionPool.getConnection();
+        assertThat(sizeOneConnectionPool.availableConnectionCount(), is(0));
+        sizeOneConnectionPool.releaseConnection(connection);
+        assertThat(sizeOneConnectionPool.availableConnectionCount(), is(1));
+    }
 }
