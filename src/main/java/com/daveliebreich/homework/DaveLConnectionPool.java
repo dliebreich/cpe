@@ -3,6 +3,8 @@ package com.daveliebreich.homework;
 import com.opower.connectionpool.ConnectionPool;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,9 +15,11 @@ import java.sql.*;
  */
 public class DaveLConnectionPool implements ConnectionPool {
     private Integer size;
+    private List<DaveLConnectionWrapper> in_use;
 
     public DaveLConnectionPool(Integer size) {
         com.google.common.base.Preconditions.checkArgument(size >= 0);
+        in_use = new ArrayList<DaveLConnectionWrapper>(size);
         this.size = size;
     }
 
@@ -27,7 +31,9 @@ public class DaveLConnectionPool implements ConnectionPool {
     public Connection getConnection() throws SQLException {
         if (size > 0) {
             size--;
-            return new DaveLConnectionWrapper();  //To change body of implemented methods use File | Settings | File Templates.
+            DaveLConnectionWrapper connection = new DaveLConnectionWrapper();
+            in_use.add(connection);
+            return connection;  //To change body of implemented methods use File | Settings | File Templates.
         } else {
             return null;
         }
@@ -38,7 +44,12 @@ public class DaveLConnectionPool implements ConnectionPool {
         if (connection == null) {
             throw new RuntimeException();
         }
-        size++;
+
+        if (in_use.remove(connection)) {
+            size++;
+        } else {
+            throw new RuntimeException();
+        }
     }
 
 }

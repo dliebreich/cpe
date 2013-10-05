@@ -69,4 +69,12 @@ public class DaveLConnectionPoolTest {
         assertThat(connection, notNullValue());
 
     }
+
+    @Test(expected = RuntimeException.class)
+    public void testReturningSameConnectionTwiceThrows() throws Exception {
+        Connection connection = sizeOneConnectionPool.getConnection();
+        sizeOneConnectionPool.releaseConnection(connection);
+        sizeOneConnectionPool.releaseConnection(connection);
+
+    }
 }
