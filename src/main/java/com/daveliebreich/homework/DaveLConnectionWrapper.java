@@ -5,255 +5,258 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
-* Created with IntelliJ IDEA.
-* User: davel
-* Date: 10/5/13
-* Time: 2:30 PM
-* To change this template use File | Settings | File Templates.
+ * A wrapper (delegate) for java.sql.Connection, used by {@link DaveLConnectionPool}
+ *
 */
 class DaveLConnectionWrapper implements Connection {
+    private Connection connection;
+
+    DaveLConnectionWrapper(Connection c) {
+        this.connection = c;
+    }
+
     @Override
     public Statement createStatement() throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.createStatement();
     }
 
     @Override
     public PreparedStatement prepareStatement(String s) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.prepareStatement(s);
     }
 
     @Override
     public CallableStatement prepareCall(String s) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.prepareCall(s);
     }
 
     @Override
     public String nativeSQL(String s) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.nativeSQL(s);
     }
 
     @Override
     public void setAutoCommit(boolean b) throws SQLException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        connection.setAutoCommit(b);
     }
 
     @Override
     public boolean getAutoCommit() throws SQLException {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.getAutoCommit();
     }
 
     @Override
     public void commit() throws SQLException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        connection.commit();
     }
 
     @Override
     public void rollback() throws SQLException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        connection.rollback();
     }
 
     @Override
     public void close() throws SQLException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        connection.close();
     }
 
     @Override
     public boolean isClosed() throws SQLException {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.isClosed();
     }
 
     @Override
     public DatabaseMetaData getMetaData() throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.getMetaData();
     }
 
     @Override
     public void setReadOnly(boolean b) throws SQLException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        connection.setReadOnly(b);
     }
 
     @Override
     public boolean isReadOnly() throws SQLException {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.isReadOnly();
     }
 
     @Override
     public void setCatalog(String s) throws SQLException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        connection.setCatalog(s);
     }
 
     @Override
     public String getCatalog() throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.getCatalog();
     }
 
     @Override
     public void setTransactionIsolation(int i) throws SQLException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        connection.setTransactionIsolation(i);
     }
 
     @Override
     public int getTransactionIsolation() throws SQLException {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.getTransactionIsolation();
     }
 
     @Override
     public SQLWarning getWarnings() throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.getWarnings();
     }
 
     @Override
     public void clearWarnings() throws SQLException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        connection.clearWarnings();
     }
 
     @Override
     public Statement createStatement(int i, int i2) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.createStatement(i, i2);
     }
 
     @Override
     public PreparedStatement prepareStatement(String s, int i, int i2) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.prepareStatement(s, i, i2);
     }
 
     @Override
     public CallableStatement prepareCall(String s, int i, int i2) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.prepareCall(s, i, i2);
     }
 
     @Override
     public Map<String, Class<?>> getTypeMap() throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.getTypeMap();
     }
 
     @Override
     public void setTypeMap(Map<String, Class<?>> stringClassMap) throws SQLException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        connection.setTypeMap(stringClassMap);
     }
 
     @Override
     public void setHoldability(int i) throws SQLException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        connection.setHoldability(i);
     }
 
     @Override
     public int getHoldability() throws SQLException {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.getHoldability();
     }
 
     @Override
     public Savepoint setSavepoint() throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.setSavepoint();
     }
 
     @Override
     public Savepoint setSavepoint(String s) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.setSavepoint(s);
     }
 
     @Override
     public void rollback(Savepoint savepoint) throws SQLException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        connection.rollback(savepoint);
     }
 
     @Override
     public void releaseSavepoint(Savepoint savepoint) throws SQLException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        connection.releaseSavepoint(savepoint);
     }
 
     @Override
     public Statement createStatement(int i, int i2, int i3) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.createStatement(i, i2, i3);
     }
 
     @Override
     public PreparedStatement prepareStatement(String s, int i, int i2, int i3) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.prepareStatement(s, i, i2, i3);
     }
 
     @Override
     public CallableStatement prepareCall(String s, int i, int i2, int i3) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.prepareCall(s, i, i2, i3);
     }
 
     @Override
     public PreparedStatement prepareStatement(String s, int i) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.prepareStatement(s, i);
     }
 
     @Override
     public PreparedStatement prepareStatement(String s, int[] ints) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.prepareStatement(s, ints);
     }
 
     @Override
     public PreparedStatement prepareStatement(String s, String[] strings) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.prepareStatement(s, strings);
     }
 
     @Override
     public Clob createClob() throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.createClob();
     }
 
     @Override
     public Blob createBlob() throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.createBlob();
     }
 
     @Override
     public NClob createNClob() throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.createNClob();
     }
 
     @Override
     public SQLXML createSQLXML() throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.createSQLXML();
     }
 
     @Override
     public boolean isValid(int i) throws SQLException {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.isValid(i);
     }
 
     @Override
     public void setClientInfo(String s, String s2) throws SQLClientInfoException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        connection.setClientInfo(s, s2);
     }
 
     @Override
     public void setClientInfo(Properties properties) throws SQLClientInfoException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        connection.setClientInfo(properties);
     }
 
     @Override
     public String getClientInfo(String s) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.getClientInfo(s);
     }
 
     @Override
     public Properties getClientInfo() throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.getClientInfo();
     }
 
     @Override
     public Array createArrayOf(String s, Object[] objects) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.createArrayOf(s, objects);
     }
 
     @Override
     public Struct createStruct(String s, Object[] objects) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.createStruct(s, objects);
     }
 
     @Override
     public <T> T unwrap(Class<T> tClass) throws SQLException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.unwrap(tClass);
     }
 
     @Override
     public boolean isWrapperFor(Class<?> aClass) throws SQLException {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return connection.isWrapperFor(aClass);
     }
 }
