@@ -1,5 +1,6 @@
 package com.daveliebreich.homework;
 
+import com.google.common.collect.Queues;
 import com.opower.connectionpool.ConnectionPool;
 
 import java.sql.*;
@@ -20,8 +21,8 @@ public class DaveLConnectionPool implements ConnectionPool {
 
     public DaveLConnectionPool(Integer size) {
         com.google.common.base.Preconditions.checkArgument(size >= 0);
-        in_use = new ArrayDeque<DaveLConnectionWrapper>(size);
-        available = new ArrayDeque<DaveLConnectionWrapper>(size);
+        in_use = Queues.synchronizedDeque(new ArrayDeque<DaveLConnectionWrapper>(size));
+        available = Queues.synchronizedDeque(new ArrayDeque<DaveLConnectionWrapper>(size));
 
         for (int index = 0; index < size; index++) {
             available.add(new DaveLConnectionWrapper());
