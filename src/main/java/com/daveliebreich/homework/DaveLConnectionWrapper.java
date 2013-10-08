@@ -9,6 +9,12 @@ import java.util.Properties;
  *
 */
 class DaveLConnectionWrapper implements Connection {
+
+    //TODO last use time, for inactivity reaper
+    //TODO return to pool on close
+    //TODO clean up state on return to pool
+    //TODO throw meaningful exception if called after inactivity reap
+
     private Connection connection;
 
     DaveLConnectionWrapper(Connection c) {
