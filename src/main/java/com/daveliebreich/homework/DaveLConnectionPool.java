@@ -8,7 +8,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
- * A simple connection pool to manage a set of {@link jave.sql.Connection} objects.
+ * A simple connection pool to manage a set of {@link java.sql.Connection} objects.
  *
  */
 public class DaveLConnectionPool implements ConnectionPool {
