@@ -26,22 +26,30 @@ public class DaveLConnectionPool implements ConnectionPool {
      *
      * @param size the size of the pool
      */
-    public DaveLConnectionPool(Integer size) {
+    public DaveLConnectionPool(DaveLConnectionPoolConnectionFactory connectionFactory, Integer size) {
         com.google.common.base.Preconditions.checkArgument(size >= 0);
+
+        if (connectionFactory == null) {
+            connectionFactory = new NullConnectionFactory();
+        }
         in_use = Queues.synchronizedDeque(new ArrayDeque<DaveLConnectionWrapper>(size));
         available = Queues.synchronizedDeque(new ArrayDeque<DaveLConnectionWrapper>(size));
 
         for (int index = 0; index < size; index++) {
-            available.add(new DaveLConnectionWrapper(null));
+            available.add(new DaveLConnectionWrapper(connectionFactory.getConnection()));
         }
         this.size = size;
     }
-
+    private class NullConnectionFactory implements DaveLConnectionPoolConnectionFactory {
+        public Connection getConnection() {
+            return null;
+        }
+    }
     /**
      * Create a pool of size 0
      */
     public DaveLConnectionPool() {
-        this(0);
+        this(null,0);
     }
 
     /**

@@ -23,8 +23,8 @@ public class DaveLConnectionPoolTest {
     @Before
     public void setUp() throws Exception {
         defaultConnectionPool = new DaveLConnectionPool();
-        sizeOneConnectionPool = new DaveLConnectionPool(1);
-        secondSizeOneConnectionPool = new DaveLConnectionPool(1);
+        sizeOneConnectionPool = new DaveLConnectionPool(null,1);
+        secondSizeOneConnectionPool = new DaveLConnectionPool(null,1);
 
     }
 
@@ -52,7 +52,7 @@ public class DaveLConnectionPoolTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testNegativeSizeThrows() throws Exception {
-        new DaveLConnectionPool(-1);
+        new DaveLConnectionPool(null,-1);
 
     }
 
