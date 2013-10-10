@@ -7,6 +7,7 @@ import java.sql.Connection;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import static org.easymock.EasyMock.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -106,5 +107,15 @@ public class DaveLConnectionPoolTest {
         assertThat(sizeOneConnectionPool.availableConnectionCount(), is(0));
         sizeOneConnectionPool.releaseConnection(connection);
         assertThat(sizeOneConnectionPool.availableConnectionCount(), is(1));
+    }
+
+    @Test
+    public void testConnectionFactoryIsCalledSizeTimesDuringPoolConstruction() throws Exception {
+        DaveLConnectionPoolConnectionFactory mockFactory =  createMock(DaveLConnectionPoolConnectionFactory.class);
+        expect(mockFactory.getConnection()).andReturn(null).times(3);
+        replay(mockFactory);
+        new DaveLConnectionPool(mockFactory, 3);
+        verify(mockFactory);
+
     }
 }

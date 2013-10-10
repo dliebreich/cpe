@@ -16,7 +16,6 @@ public class DaveLConnectionPool implements ConnectionPool {
     private Deque<DaveLConnectionWrapper> in_use;
     private Deque<DaveLConnectionWrapper> available;
 
-    //TODO constructor that takes a ConnectionFactory param
     //TODO lazy mode - create connections when needed
     //TODO lazy inactivity reaper - if none avail, check in_use for unused
     //TODO - can I use Queue instead of Deque?
